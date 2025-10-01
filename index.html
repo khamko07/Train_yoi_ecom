@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopNow - Modern Commerce Landing Page</title>
+    <title>YoiShop - Modern Commerce Landing Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -543,7 +543,7 @@
 <body>
     <!-- Header with logo and auth buttons -->
     <header role="banner">
-        <div class="logo" aria-label="ShopNow Logo">ShopNow</div>
+        <div class="logo" aria-label="YoiShop Logo">YoiShop</div>
         <div class="auth-buttons">
             <button class="btn" id="registerBtn" aria-label="Open Register Modal">Register</button>
             <button class="btn btn-secondary" id="loginBtn" aria-label="Open Login Modal">Login</button>
@@ -553,7 +553,7 @@
     <!-- Hero Section -->
     <section class="hero" role="main">
         <div class="hero-content">
-            <h1>Welcome to ShopNow</h1>
+            <h1>Welcome to YoiShop</h1>
             <p>Discover amazing products at unbeatable prices. Start shopping today and elevate your lifestyle with our curated selection.</p>
             <button class="btn btn-primary">Shop Now</button>
         </div>
@@ -561,7 +561,7 @@
 
     <!-- Features Section -->
     <section class="features">
-        <h2>Why Choose ShopNow?</h2>
+        <h2>Why Choose YoiShop?</h2>
         <div class="feature-grid">
             <div class="feature">
                 <div class="feature-icon">🚀</div>
@@ -587,7 +587,7 @@
         <div class="testimonial-grid">
             <div class="testimonial-card">
                 <div class="testimonial-content">
-                    "ShopNow has completely transformed my shopping experience. The quality of products and customer service is exceptional!"
+                    "YoiShop has completely transformed my shopping experience. The quality of products and customer service is exceptional!"
                 </div>
                 <div class="testimonial-author">
                     <div class="author-avatar">S</div>
@@ -647,7 +647,7 @@
 
     <!-- Footer -->
     <footer role="contentinfo">
-        <p>&copy; 2023 ShopNow. All rights reserved.</p>
+        <p>&copy; 2025 YoiShop. All rights reserved.</p>
     </footer>
 
     <!-- Register Modal -->
@@ -656,9 +656,17 @@
             <span class="close" id="closeRegister" aria-label="Close Register Modal">&times;</span>
             <h2 id="registerTitle">Register</h2>
             <form id="registerForm">
-                <label for="regName">Name:</label>
-                <input type="text" id="regName" required aria-describedby="nameError">
-                <div class="error" id="nameError">Name is required.</div>
+                <label for="regFirstName">First Name:</label>
+                <input type="text" id="regFirstName" required aria-describedby="firstNameError">
+                <div class="error" id="firstNameError">First name is required.</div>
+
+                <label for="regLastName">Last Name:</label>
+                <input type="text" id="regLastName" required aria-describedby="lastNameError">
+                <div class="error" id="lastNameError">Last name is required.</div>
+
+                <label for="regUserName">User Name:</label>
+                <input type="text" id="regUserName" required aria-describedby="userNameError">
+                <div class="error" id="userNameError">User name is required.</div>
 
                 <label for="regEmail">Email:</label>
                 <input type="email" id="regEmail" required aria-describedby="emailError">
@@ -684,9 +692,9 @@
             <span class="close" id="closeLogin" aria-label="Close Login Modal">&times;</span>
             <h2 id="loginTitle">Login</h2>
             <form id="loginForm">
-                <label for="loginEmail">Email:</label>
-                <input type="email" id="loginEmail" required aria-describedby="loginEmailError">
-                <div class="error" id="loginEmailError">Please enter a valid email.</div>
+                <label for="loginUserName">User Name:</label>
+                <input type="text" id="loginUserName" required aria-describedby="loginUserNameError">
+                <div class="error" id="loginUserNameError">User name is required.</div>
 
                 <label for="loginPassword">Password:</label>
                 <input type="password" id="loginPassword" required aria-describedby="loginPassError">
@@ -714,13 +722,13 @@
         registerBtn.addEventListener('click', () => {
             registerModal.style.display = 'block';
             registerModal.setAttribute('aria-hidden', 'false');
-            document.getElementById('regName').focus();
+            document.getElementById('regFirstName').focus();
         });
 
         loginBtn.addEventListener('click', () => {
             loginModal.style.display = 'block';
             loginModal.setAttribute('aria-hidden', 'false');
-            document.getElementById('loginEmail').focus();
+            document.getElementById('loginUserName').focus();
         });
 
         // Close modals
@@ -773,7 +781,9 @@
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const name = document.getElementById('regName').value.trim();
+            const firstName = document.getElementById('regFirstName').value.trim();
+            const lastName = document.getElementById('regLastName').value.trim();
+            const userName = document.getElementById('regUserName').value.trim();
             const email = document.getElementById('regEmail').value.trim();
             const password = document.getElementById('regPassword').value;
             const confirm = document.getElementById('regConfirm').value;
@@ -781,14 +791,26 @@
             let isValid = true;
 
             // Reset errors
-            hideError(document.getElementById('nameError'));
+            hideError(document.getElementById('firstNameError'));
+            hideError(document.getElementById('lastNameError'));
+            hideError(document.getElementById('userNameError'));
             hideError(document.getElementById('emailError'));
             hideError(document.getElementById('passError'));
             hideError(document.getElementById('confirmError'));
             hideSuccess(document.getElementById('regSuccess'));
 
-            if (!name) {
-                showError(document.getElementById('nameError'), 'Name is required.');
+            if (!firstName) {
+                showError(document.getElementById('firstNameError'), 'First name is required.');
+                isValid = false;
+            }
+
+            if (!lastName) {
+                showError(document.getElementById('lastNameError'), 'Last name is required.');
+                isValid = false;
+            }
+
+            if (!userName) {
+                showError(document.getElementById('userNameError'), 'User name is required.');
                 isValid = false;
             }
 
@@ -809,7 +831,7 @@
 
             if (isValid) {
                 // Store in localStorage (demo only)
-                localStorage.setItem('user', JSON.stringify({ name, email, password }));
+                localStorage.setItem('user', JSON.stringify({ firstName, lastName, userName, email, password }));
                 showSuccess(document.getElementById('regSuccess'));
                 registerForm.reset();
                 setTimeout(() => closeModal(registerModal), 2000);
@@ -820,19 +842,19 @@
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const email = document.getElementById('loginEmail').value.trim();
+            const userName = document.getElementById('loginUserName').value.trim();
             const password = document.getElementById('loginPassword').value;
 
             let isValid = true;
 
             // Reset errors
-            hideError(document.getElementById('loginEmailError'));
+            hideError(document.getElementById('loginUserNameError'));
             hideError(document.getElementById('loginPassError'));
             hideSuccess(document.getElementById('loginSuccess'));
             hideError(document.getElementById('loginFail'));
 
-            if (!validateEmail(email)) {
-                showError(document.getElementById('loginEmailError'), 'Please enter a valid email.');
+            if (!userName) {
+                showError(document.getElementById('loginUserNameError'), 'User name is required.');
                 isValid = false;
             }
 
@@ -845,7 +867,7 @@
                 const storedUser = localStorage.getItem('user');
                 if (storedUser) {
                     const user = JSON.parse(storedUser);
-                    if (user.email === email && user.password === password) {
+                    if (user.userName === userName && user.password === password) {
                         showSuccess(document.getElementById('loginSuccess'));
                         loginForm.reset();
                         setTimeout(() => closeModal(loginModal), 2000);
@@ -859,7 +881,7 @@
         });
 
         // Form input event listeners to hide errors on input
-        ['regName', 'regEmail', 'regPassword', 'regConfirm', 'loginEmail', 'loginPassword'].forEach(id => {
+        ['regFirstName', 'regLastName', 'regUserName', 'regEmail', 'regPassword', 'regConfirm', 'loginUserName', 'loginPassword'].forEach(id => {
             document.getElementById(id).addEventListener('input', () => {
                 const formId = id.startsWith('reg') ? 'registerForm' : 'loginForm';
                 // Hide relevant errors on input (simplified)
