@@ -53,6 +53,7 @@
             align-items: center;
             padding: 1.5rem 2rem;
             background-color: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
             position: sticky;
@@ -345,6 +346,26 @@
             font-size: 1.1rem;
         }
 
+        /* Form specific styles */
+        .btn-form {
+            background: var(--gradient-primary);
+            color: var(--background-color);
+            border: none;
+            width: 100%;
+        }
+
+        .btn-form:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .login-fail {
+            color: var(--danger-color);
+            text-align: center;
+            display: none;
+            margin-top: 1rem;
+        }
+
         /* Footer */
         footer {
             padding: 3rem 2rem;
@@ -531,9 +552,11 @@
 
     <!-- Hero Section -->
     <section class="hero" role="main">
-        <h1>Welcome to ShopNow</h1>
-        <p>Discover amazing products at unbeatable prices. Start shopping today and elevate your lifestyle with our curated selection.</p>
-        <button class="btn" style="background-color: var(--background-color); color: var(--primary-color); padding: 1rem 2rem; font-size: 1.1rem;">Shop Now</button>
+        <div class="hero-content">
+            <h1>Welcome to ShopNow</h1>
+            <p>Discover amazing products at unbeatable prices. Start shopping today and elevate your lifestyle with our curated selection.</p>
+            <button class="btn btn-primary">Shop Now</button>
+        </div>
     </section>
 
     <!-- Features Section -->
@@ -541,43 +564,82 @@
         <h2>Why Choose ShopNow?</h2>
         <div class="feature-grid">
             <div class="feature">
+                <div class="feature-icon">🚀</div>
                 <h3>Fast Delivery</h3>
-                <p>Get your orders delivered quickly and reliably, right to your doorstep.</p>
+                <p>Get your orders delivered quickly and reliably, right to your doorstep with our express shipping service.</p>
             </div>
             <div class="feature">
+                <div class="feature-icon">🔒</div>
                 <h3>Secure Payments</h3>
-                <p>Shop with confidence using our encrypted payment systems.</p>
+                <p>Shop with confidence using our encrypted payment systems and industry-leading security protocols.</p>
             </div>
             <div class="feature">
-                <h3>Great Support</h3>
-                <p>Our team is here 24/7 to assist you with any questions.</p>
+                <div class="feature-icon">💬</div>
+                <h3>24/7 Support</h3>
+                <p>Our dedicated team is here around the clock to assist you with any questions or concerns.</p>
             </div>
         </div>
     </section>
 
-    <!-- Featured Products Section -->
-    <section class="products" aria-labelledby="products-heading">
-        <h2 id="products-heading">Featured Products</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image" aria-hidden="true">📱</div>
-                <div class="product-info">
-                    <h3>Smartphone Pro</h3>
-                    <p class="product-price">$299.99</p>
+    <!-- Testimonials Section -->
+    <section class="testimonials" aria-labelledby="testimonials-heading">
+        <h2 id="testimonials-heading">What Our Customers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "ShopNow has completely transformed my shopping experience. The quality of products and customer service is exceptional!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">S</div>
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Verified Customer</p>
+                        <div class="testimonial-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="product-card">
-                <div class="product-image" aria-hidden="true">💻</div>
-                <div class="product-info">
-                    <h3>Laptop Elite</h3>
-                    <p class="product-price">$899.99</p>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "Fast delivery, great prices, and amazing customer support. I've been shopping here for over a year and never been disappointed."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">M</div>
+                    <div class="author-info">
+                        <h4>Michael Chen</h4>
+                        <p>Regular Customer</p>
+                        <div class="testimonial-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="product-card">
-                <div class="product-image" aria-hidden="true">🎧</div>
-                <div class="product-info">
-                    <h3>Wireless Headphones</h3>
-                    <p class="product-price">$149.99</p>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "The user experience is smooth and intuitive. Shopping here feels effortless and secure. Highly recommend to everyone!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">E</div>
+                    <div class="author-info">
+                        <h4>Emily Rodriguez</h4>
+                        <p>Happy Shopper</p>
+                        <div class="testimonial-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -610,7 +672,7 @@
                 <input type="password" id="regConfirm" required aria-describedby="confirmError">
                 <div class="error" id="confirmError">Passwords must match.</div>
 
-                <button type="submit" class="btn" style="background-color: var(--primary-color); color: var(--background-color);">Register</button>
+                <button type="submit" class="btn btn-form">Register</button>
             </form>
             <div class="success" id="regSuccess">Registration successful! You can now log in.</div>
         </div>
@@ -630,10 +692,10 @@
                 <input type="password" id="loginPassword" required aria-describedby="loginPassError">
                 <div class="error" id="loginPassError">Password is required.</div>
 
-                <button type="submit" class="btn" style="background-color: var(--primary-color); color: var(--background-color);">Login</button>
+                <button type="submit" class="btn btn-form">Login</button>
             </form>
             <div class="success" id="loginSuccess">Login successful! Welcome back.</div>
-            <div class="error" id="loginFail" style="color: var(--danger-color); text-align: center; display: none; margin-top: 1rem;">Invalid credentials. Please try again.</div>
+            <div class="error login-fail" id="loginFail">Invalid credentials. Please try again.</div>
         </div>
     </div>
 
